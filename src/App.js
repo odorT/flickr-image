@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Search from './components/Search';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [searchInput, setSearchInput] = useState('');
+    const [search, setSearch] = useState('');
+
+    const onSearchChange = (event) => {
+        setSearchInput(event.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        e.currentTarget.reset();
+        setSearch(searchInput);
+    };
+
+    return (
+        <div className="container">
+            <form className="search-form" onSubmit={e => handleSubmit(e)}>
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search..."
+                    onChange={onSearchChange}
+                    value={searchInput}
+                />
+                <button
+                    type="submit"
+                    className={`search-button ${searchInput.trim() ? "active" : null}`}
+                    disabled={!searchInput.trim()}
+                >
+                    <svg height="32" width="32">
+                        <path
+                            d="M19.427 21.427a8.5 8.5 0 1 1 2-2l5.585 5.585c.55.55.546 1.43 0 1.976l-.024.024a1.399 1.399 0 0 1-1.976 0l-5.585-5.585zM14.5 21a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13z"
+                            fill="#ffffff"
+                            fillRule="evenodd"
+                        />
+                    </svg>
+                </button>
+            </form>
+
+            <Search searchTerm={search} />
+        </div>
+    )
 }
 
 export default App;

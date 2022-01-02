@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# NOTE:
+You should provide your own api key from flickr in config.js
+
 ## Available Scripts
 
 In the project directory, you can run:
